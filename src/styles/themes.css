@@ -1,0 +1,74 @@
+:root {
+  /* 基础环境色 */
+  --bg-page: #FFF9F9;
+  --bg-board: #E6D8D8;
+  --bg-slot: #F4EAEA;
+  --text-primary: #776E65;
+  --text-light: #FFFFFF;
+
+  /* 基础尺寸 */
+  --tile-size: 100px;
+  --grid-gap: 15px;
+  --board-padding: 15px;
+  --border-radius: 6px;
+
+  /* 动画曲线 */
+  --transition-move: transform 100ms ease-in-out;
+  --animation-pop: pop 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --animation-merge: merge 150ms ease-in-out;
+
+  /* 方块颜色 - 2 */
+  --tile-2-bg: #FFD1DC;
+  --tile-2-color: #776E65;
+  /* 4 */
+  --tile-4-bg: #FFDFBA;
+  --tile-4-color: #776E65;
+  /* 8 */
+  --tile-8-bg: #FFFFBA;
+  --tile-8-color: #776E65;
+  /* 16 */
+  --tile-16-bg: #BAFFC9;
+  --tile-16-color: #776E65;
+  /* 32 */
+  --tile-32-bg: #BAE1FF;
+  --tile-32-color: #776E65;
+  /* 64 */
+  --tile-64-bg: #A0C4FF;
+  --tile-64-color: #FFFFFF;
+  /* 128 */
+  --tile-128-bg: #BDB2FF;
+  --tile-128-color: #FFFFFF;
+  /* 256 */
+  --tile-256-bg: #FFC6FF;
+  --tile-256-color: #FFFFFF;
+  /* 512 */
+  --tile-512-bg: #FF9AA2;
+  --tile-512-color: #FFFFFF;
+  /* 1024 */
+  --tile-1024-bg: #FFDAC1;
+  --tile-1024-color: #FFFFFF;
+  /* 2048 */
+  --tile-2048-bg: #FFB7B2;
+  --tile-2048-color: #FFFFFF;
+  /* 超级大数 fallback */
+  --tile-super-bg: #3c3a32;
+  --tile-super-color: #FFFFFF;
+}
+
+[data-theme='mint'] {
+  --bg-page: #F0FFF4;
+  --bg-board: #C6F6D5;
+  --bg-slot: #E6FFFA;
+  /* 可根据需要补充其他薄荷色系变量 */
+}
+
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes merge {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}

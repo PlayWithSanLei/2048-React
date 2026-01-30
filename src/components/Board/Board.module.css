@@ -1,0 +1,33 @@
+.boardContainer {
+  position: relative;
+  background: var(--bg-board);
+  padding: var(--board-padding);
+  border-radius: var(--border-radius);
+  width: calc(var(--tile-size) * 4 + var(--grid-gap) * 3 + var(--board-padding) * 2);
+  height: calc(var(--tile-size) * 4 + var(--grid-gap) * 3 + var(--board-padding) * 2);
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(4, var(--tile-size));
+  grid-template-rows: repeat(4, var(--tile-size));
+  gap: var(--grid-gap);
+}
+
+.cell {
+  width: var(--tile-size);
+  height: var(--tile-size);
+  background: var(--bg-slot);
+  border-radius: var(--border-radius);
+}
+
+.tileContainer {
+  position: absolute;
+  top: var(--board-padding);
+  left: var(--board-padding);
+  width: calc(100% - var(--board-padding) * 2);
+  height: calc(100% - var(--board-padding) * 2);
+  pointer-events: none; /* Let clicks pass through to board for gestures if needed */
+}
