@@ -126,23 +126,46 @@ interface MoveResult {
 }
 
 export const move = (currentTiles: Tile[], direction: Direction): MoveResult => {
-  // 1. Map tiles to grid
+  // 1. Map tiles to grid with clean copies
   let grid = getEmptyGrid();
   currentTiles.forEach((tile) => {
-    // Reset status
-    delete tile.mergedFrom;
-    delete tile.isNew;
-    grid[tile.position.y][tile.position.x] = tile;
+    // Create a clean copy with original position for each grid cell
+    const tileCopy: Tile = {
+      id: tile.id,
+      value: tile.value,
+      position: { x: tile.position.x, y: tile.position.y },
+    };
+    grid[tile.position.y][tile.position.x] = tileCopy;
   });
 
   // 2. Rotate grid so we always process as "move left"
+  // When rotating, we create new tile objects with updated positions
+  const rotateWithPositions = (inputGrid: Grid, rotationFn: (g: Grid) => Grid): Grid => {
+    const rotated = rotationFn(inputGrid);
+    // Update position properties to match grid positions
+    for (let y = 0; y < GRID_SIZE; y++) {
+      for (let x = 0; x < GRID_SIZE; x++) {
+        const tile = rotated[y][x];
+        if (tile) {
+          // Create new object with updated position
+          rotated[y][x] = {
+            id: tile.id,
+            value: tile.value,
+            position: { x, y },
+          };
+        }
+      }
+    }
+    return rotated;
+  };
+
   if (direction === 'UP') {
-    grid = rotateLeft(grid);
+    grid = rotateWithPositions(grid, rotateLeft);
   } else if (direction === 'RIGHT') {
-    grid = rotateLeft(grid);
-    grid = rotateLeft(grid);
+    grid = rotateWithPositions(grid, rotateLeft);
+    grid = rotateWithPositions(grid, rotateLeft);
   } else if (direction === 'DOWN') {
-    grid = rotateRight(grid);
+    grid = rotateWithPositions(grid, rotateRight);
   }
 
   // 3. Process each row (move left logic)
@@ -153,7 +176,7 @@ export const move = (currentTiles: Tile[], direction: Direction): MoveResult => 
   for (let y = 0; y < GRID_SIZE; y++) {
     const row = grid[y].filter((t) => t !== null) as Tile[];
     const newRow: Tile[] = [];
-    
+
     let skipNext = false;
 
     for (let x = 0; x < row.length; x++) {
@@ -170,7 +193,7 @@ export const move = (currentTiles: Tile[], direction: Direction): MoveResult => 
         const mergedTile: Tile = {
           id: uuidv4(),
           value: current.value * 2,
-          position: { x: newRow.length, y }, // Temporary position, will be rotated back
+          position: { x: newRow.length, y },
           mergedFrom: [current, next],
         };
         newRow.push(mergedTile);
@@ -178,43 +201,49 @@ export const move = (currentTiles: Tile[], direction: Direction): MoveResult => 
         skipNext = true;
         moved = true; // A merge counts as a move
       } else {
-        // Move
+        // Check if actually moved (current grid position vs new position)
+        // current.position.x is the tile's x in the rotated grid
+        // newRow.length is where it will go after compression
         if (current.position.x !== newRow.length) {
           moved = true;
         }
-        // Update position (create new object to avoid mutation issues if needed, but here we just update)
-        // Actually, for React state immutability, we should probably clone if we were modifying deep state,
-        // but since we are building a new `nextTiles` array, we can just push a modified clone.
+        // Create new tile object with updated position
         newRow.push({
-          ...current,
+          id: current.id,
+          value: current.value,
           position: { x: newRow.length, y },
         });
       }
     }
 
     // Add processed row to nextTiles
-    // Note: We need to assign correct y index if we were just iterating, but here y is the row index in the rotated grid.
     newRow.forEach(tile => {
-       // Ensure position y is correct for this row in the rotated grid
-       tile.position.y = y; 
-       nextTiles.push(tile);
+      nextTiles.push(tile);
     });
   }
 
   // 4. Rotate back positions by reconstructing grid and rotating grid
-  
-  // Construct grid from nextTiles
-  let resultGrid = getEmptyGrid();
-  nextTiles.forEach(t => resultGrid[t.position.y][t.position.x] = t);
 
-  // Rotate result grid back
+  // Construct grid from nextTiles with clean copies
+  let resultGrid = getEmptyGrid();
+  nextTiles.forEach(t => {
+    const tileCopy: Tile = {
+      id: t.id,
+      value: t.value,
+      position: { x: t.position.x, y: t.position.y },
+      mergedFrom: t.mergedFrom,
+    };
+    resultGrid[t.position.y][t.position.x] = tileCopy;
+  });
+
+  // Rotate result grid back (with position updates)
   if (direction === 'UP') {
-     resultGrid = rotateRight(resultGrid); // Undo Left
+     resultGrid = rotateWithPositions(resultGrid, rotateRight);
   } else if (direction === 'RIGHT') {
-     resultGrid = rotateRight(resultGrid); // Undo Left*2
-     resultGrid = rotateRight(resultGrid);
+     resultGrid = rotateWithPositions(resultGrid, rotateRight);
+     resultGrid = rotateWithPositions(resultGrid, rotateRight);
   } else if (direction === 'DOWN') {
-     resultGrid = rotateLeft(resultGrid); // Undo Right
+     resultGrid = rotateWithPositions(resultGrid, rotateLeft);
   }
 
   // Extract tiles with updated positions
@@ -223,18 +252,11 @@ export const move = (currentTiles: Tile[], direction: Direction): MoveResult => 
       for(let x=0; x<GRID_SIZE; x++){
           const tile = resultGrid[y][x];
           if(tile){
-              tile.position = { x, y };
               finalTiles.push(tile);
           }
       }
   }
 
-  // Check if actually moved (compare positions and count)
-  // We already tracked 'moved' flag during row processing, but that only tracks relative changes in the rotated frame.
-  // Ideally, if any tile changed position or merged, moved is true.
-  // The logic inside the loop `if (current.position.x !== newRow.length)` checks if it moved in the compressed line.
-  // This is correct for the logic.
-  
   return {
     tiles: finalTiles,
     scoreIncrease,
