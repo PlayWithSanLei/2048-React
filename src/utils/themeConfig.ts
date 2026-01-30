@@ -3,18 +3,18 @@
  * Defines all available themes with their display names and metadata
  */
 export const THEMES = [
-  { id: 'candy', name: '🍬 Candy', description: 'Soft pastel colors' },
-  { id: 'mint', name: '🌿 Mint', description: 'Fresh green palette' },
-  { id: 'apple', name: '🍎 Apple', description: 'Minimalist flat design' },
-  { id: 'bamboo', name: '🎋 Bamboo', description: 'Chinese bamboo forest' },
-  { id: 'festive', name: '🧧 Festive', description: 'Chinese celebration' },
-  { id: 'ink', name: '🖌️ Ink', description: 'Traditional ink wash' },
-  { id: 'cyberpunk', name: '🤖 Cyberpunk', description: 'Neon future vibes' },
-  { id: 'steampunk', name: '⚙️ Steampunk', description: 'Victorian retro tech' },
-  { id: 'witcher', name: '🐺 Witcher', description: 'Dark medieval fantasy' },
-  { id: 'zelda', name: '🗡️ Zelda', description: 'Sheikah slate design' },
-  { id: 'mario', name: '🍄 Mario', description: 'Classic Nintendo colors' },
-  { id: 'microsoft', name: '💻 Microsoft', description: 'Metro/Fluent design' },
+  { id: 'candy', emoji: '🍬', name: 'Candy', shortName: 'Candy', description: 'Soft pastel colors' },
+  { id: 'mint', emoji: '🌿', name: 'Mint', shortName: 'Mint', description: 'Fresh green palette' },
+  { id: 'apple', emoji: '🍎', name: 'Apple', shortName: 'Apple', description: 'Minimalist flat design' },
+  { id: 'bamboo', emoji: '🎋', name: 'Bamboo', shortName: 'Bamboo', description: 'Chinese bamboo forest' },
+  { id: 'festive', emoji: '🧧', name: 'Festive', shortName: 'Festive', description: 'Chinese celebration' },
+  { id: 'ink', emoji: '🖌️', name: 'Ink', shortName: 'Ink', description: 'Traditional ink wash' },
+  { id: 'cyberpunk', emoji: '🤖', name: 'Cyberpunk', shortName: 'Cyber', description: 'Neon future vibes' },
+  { id: 'steampunk', emoji: '⚙️', name: 'Steampunk', shortName: 'Steam', description: 'Victorian retro tech' },
+  { id: 'witcher', emoji: '🐺', name: 'Witcher', shortName: 'Witcher', description: 'Dark medieval fantasy' },
+  { id: 'zelda', emoji: '🗡️', name: 'Zelda', shortName: 'Zelda', description: 'Sheikah slate design' },
+  { id: 'mario', emoji: '🍄', name: 'Mario', shortName: 'Mario', description: 'Classic Nintendo colors' },
+  { id: 'microsoft', emoji: '💻', name: 'Microsoft', shortName: 'MS', description: 'Metro/Fluent design' },
 ] as const;
 
 export type ThemeId = typeof THEMES[number]['id'];

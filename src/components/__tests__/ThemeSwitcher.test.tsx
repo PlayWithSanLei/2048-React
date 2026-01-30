@@ -1,6 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
 import * as storage from '../../utils/storage';
 
@@ -35,90 +34,86 @@ describe('ThemeSwitcher Component', () => {
 
   // ==================== Basic Rendering ====================
   describe('rendering', () => {
-    it('should render theme selector', () => {
+    it('should render trigger button', () => {
       render(<ThemeSwitcher />);
-      expect(screen.getByRole('combobox')).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /select theme/i })).toBeInTheDocument();
     });
 
-    it('should display theme label', () => {
+    it('should display current theme emoji and name', () => {
+      mockGetTheme.mockReturnValue('candy');
       render(<ThemeSwitcher />);
-      expect(screen.getByText('Theme')).toBeInTheDocument();
+      expect(screen.getByText('🍬')).toBeInTheDocument();
+      expect(screen.getByText('Candy')).toBeInTheDocument();
     });
 
-    it('should render all theme options', () => {
+    it('should display arrow icon', () => {
       render(<ThemeSwitcher />);
-      const select = screen.getByRole('combobox');
-      expect(select).toBeInTheDocument();
-
-      const options = screen.getAllByRole('option');
-      expect(options).toHaveLength(12);
-    });
-
-    it('should display theme names with emojis', () => {
-      render(<ThemeSwitcher />);
-      expect(screen.getByText('🍬 Candy')).toBeInTheDocument();
-      expect(screen.getByText('🌿 Mint')).toBeInTheDocument();
-      expect(screen.getByText('🍎 Apple')).toBeInTheDocument();
-      expect(screen.getByText('🎋 Bamboo')).toBeInTheDocument();
-      expect(screen.getByText('🧧 Festive')).toBeInTheDocument();
+      expect(screen.getByText('▼')).toBeInTheDocument();
     });
   });
 
-  // ==================== Theme Switching ====================
-  describe('theme switching', () => {
-    it('should change from candy to mint', async () => {
+  // ==================== Modal Interaction ====================
+  describe('modal interaction', () => {
+    it('should open modal when trigger button is clicked', () => {
+      render(<ThemeSwitcher />);
+      const trigger = screen.getByRole('button', { name: /select theme/i });
+
+      fireEvent.click(trigger);
+
+      expect(screen.getByText('Choose Theme')).toBeInTheDocument();
+    });
+
+    it('should render all theme options in grid', () => {
+      render(<ThemeSwitcher />);
+      const trigger = screen.getByRole('button', { name: /select theme/i });
+
+      fireEvent.click(trigger);
+
+      // Check for theme emojis in the modal (using getAllByText since emoji appears in both trigger and modal)
+      expect(screen.getAllByText('🍬')).toHaveLength(2); // trigger + modal
+      expect(screen.getByText('🌿')).toBeInTheDocument();
+      expect(screen.getByText('🍎')).toBeInTheDocument();
+      expect(screen.getByText('🎋')).toBeInTheDocument();
+      expect(screen.getByText('🧧')).toBeInTheDocument();
+
+      // Check for theme name in modal
+      expect(screen.getByText('Mint')).toBeInTheDocument();
+    });
+  });
+
+  // ==================== Theme Selection ====================
+  describe('theme selection', () => {
+    it('should change theme when clicking a theme card', () => {
       mockGetTheme.mockReturnValue('candy');
       render(<ThemeSwitcher />);
 
-      const user = userEvent.setup();
-      const select = screen.getByRole('combobox');
+      const trigger = screen.getByRole('button', { name: /select theme/i });
+      fireEvent.click(trigger);
 
-      await user.selectOptions(select, 'mint');
+      // Find and click the Mint theme card
+      const mintButton = screen.getAllByRole('button').find(btn => btn.textContent?.includes('Mint'));
+      if (mintButton && mintButton !== trigger) {
+        fireEvent.click(mintButton);
+      }
 
       expect(mockSetTheme).toHaveBeenCalledWith('mint');
       expect(mockSetAttribute).toHaveBeenCalledWith('data-theme', 'mint');
     });
 
-    it('should change to apple theme', async () => {
+    it('should close modal after selecting a theme', () => {
       mockGetTheme.mockReturnValue('candy');
       render(<ThemeSwitcher />);
 
-      const user = userEvent.setup();
-      const select = screen.getByRole('combobox');
+      const trigger = screen.getByRole('button', { name: /select theme/i });
+      fireEvent.click(trigger);
 
-      await user.selectOptions(select, 'apple');
+      const appleButton = screen.getAllByRole('button').find(btn => btn.textContent?.includes('Apple'));
+      if (appleButton && appleButton !== trigger) {
+        fireEvent.click(appleButton);
+      }
 
-      expect(mockSetTheme).toHaveBeenCalledWith('apple');
-      expect(mockSetAttribute).toHaveBeenCalledWith('data-theme', 'apple');
-    });
-
-    it('should change to cyberpunk theme', async () => {
-      mockGetTheme.mockReturnValue('apple');
-      render(<ThemeSwitcher />);
-
-      const user = userEvent.setup();
-      const select = screen.getByRole('combobox');
-
-      await user.selectOptions(select, 'cyberpunk');
-
-      expect(mockSetTheme).toHaveBeenCalledWith('cyberpunk');
-      expect(mockSetAttribute).toHaveBeenCalledWith('data-theme', 'cyberpunk');
-    });
-
-    it('should handle multiple theme changes', async () => {
-      mockGetTheme.mockReturnValue('candy');
-      render(<ThemeSwitcher />);
-
-      const user = userEvent.setup();
-      const select = screen.getByRole('combobox');
-
-      // First change: candy -> apple
-      await user.selectOptions(select, 'apple');
-      expect(mockSetTheme).toHaveBeenLastCalledWith('apple');
-
-      // Second change: apple -> zelda
-      await user.selectOptions(select, 'zelda');
-      expect(mockSetTheme).toHaveBeenLastCalledWith('zelda');
+      // Modal should be closed, "Choose Theme" should not be visible
+      expect(screen.queryByText('Choose Theme')).not.toBeInTheDocument();
     });
   });
 
@@ -129,6 +124,8 @@ describe('ThemeSwitcher Component', () => {
       render(<ThemeSwitcher />);
 
       expect(mockSetAttribute).toHaveBeenCalledWith('data-theme', 'mint');
+      expect(screen.getByText('🌿')).toBeInTheDocument();
+      expect(screen.getByText('Mint')).toBeInTheDocument();
     });
 
     it('should use candy theme when no theme is stored', () => {
@@ -136,27 +133,23 @@ describe('ThemeSwitcher Component', () => {
       render(<ThemeSwitcher />);
 
       expect(mockSetAttribute).toHaveBeenCalledWith('data-theme', 'candy');
-    });
-
-    it('should select current theme in dropdown', () => {
-      mockGetTheme.mockReturnValue('mint');
-      render(<ThemeSwitcher />);
-
-      const select = screen.getByRole('combobox') as HTMLSelectElement;
-      expect(select.value).toBe('mint');
+      expect(screen.getByText('🍬')).toBeInTheDocument();
     });
   });
 
   // ==================== Storage Integration ====================
   describe('storage integration', () => {
-    it('should save new theme to storage', async () => {
+    it('should save new theme to storage', () => {
       mockGetTheme.mockReturnValue('candy');
       render(<ThemeSwitcher />);
 
-      const user = userEvent.setup();
-      const select = screen.getByRole('combobox');
+      const trigger = screen.getByRole('button', { name: /select theme/i });
+      fireEvent.click(trigger);
 
-      await user.selectOptions(select, 'witcher');
+      const witcherButton = screen.getAllByRole('button').find(btn => btn.textContent?.includes('Witcher'));
+      if (witcherButton && witcherButton !== trigger) {
+        fireEvent.click(witcherButton);
+      }
 
       expect(mockSetTheme).toHaveBeenCalledWith('witcher');
     });
@@ -166,23 +159,6 @@ describe('ThemeSwitcher Component', () => {
       render(<ThemeSwitcher />);
 
       expect(mockSetTheme).toHaveBeenCalledWith('zelda');
-    });
-  });
-
-  // ==================== All Themes ====================
-  describe('all themes available', () => {
-    const allThemes = [
-      'candy', 'mint', 'apple', 'bamboo', 'festive', 'ink',
-      'cyberpunk', 'steampunk', 'witcher', 'zelda', 'mario', 'microsoft'
-    ];
-
-    it('should have all theme options available', () => {
-      render(<ThemeSwitcher />);
-
-      allThemes.forEach(themeId => {
-        const option = screen.getByRole('option', { name: new RegExp(themeId, 'i') });
-        expect(option).toBeInTheDocument();
-      });
     });
   });
 });

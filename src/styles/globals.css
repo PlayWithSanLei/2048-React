@@ -12,6 +12,7 @@
 body {
   font-family: var(--font-family-base);
   background-color: var(--bg-page);
+  background-image: var(--bg-image-page);
   color: var(--text-primary);
   display: flex;
   justify-content: center;

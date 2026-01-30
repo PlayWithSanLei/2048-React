@@ -1,37 +1,310 @@
 .container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Trigger Button */
+.triggerButton {
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-.label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  white-space: nowrap;
-  opacity: 0.7;
-}
-
-.select {
+  gap: 6px;
   background: var(--bg-board);
   color: var(--text-primary);
   border: none;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 12px;
   font-size: 0.85rem;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 36px;
+}
+
+.triggerButton:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.triggerButton:active {
+  transform: scale(0.98);
+}
+
+.triggerIcon {
+  font-size: 1.1rem;
+}
+
+.triggerText {
+  font-weight: 600;
+}
+
+.arrow {
+  font-size: 0.65rem;
+  transition: transform 0.2s ease;
+}
+
+.arrowOpen {
+  transform: rotate(180deg);
+}
+
+/* Backdrop */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.15s ease;
+}
+
+/* Modal - Desktop */
+.modal {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  background: var(--bg-page);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow: hidden;
+  animation: slideDown 0.2s ease;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--bg-board);
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
   transition: opacity 0.2s;
-  min-width: 140px;
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.select:hover {
-  opacity: 0.9;
+.closeButton:hover {
+  opacity: 1;
 }
 
-.select:focus {
-  outline: 2px solid var(--text-primary);
-  outline-offset: 2px;
+.closeButton:active {
+  transform: scale(0.9);
 }
 
-/* Option styles are handled by the browser's native select */
+/* Theme Grid */
+.themeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 16px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.themeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+  background: var(--bg-board);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  min-height: 64px;
+}
+
+.themeCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.themeCard:active {
+  transform: scale(0.95);
+}
+
+.themeCardActive {
+  border-color: var(--text-primary);
+  background: var(--bg-slot);
+}
+
+.themeEmoji {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.themeName {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.checkmark {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar styling */
+.themeGrid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.themeGrid::-webkit-scrollbar-track {
+  background: var(--bg-board);
+  border-radius: 3px;
+}
+
+.themeGrid::-webkit-scrollbar-thumb {
+  background: var(--text-primary);
+  border-radius: 3px;
+  opacity: 0.3;
+}
+
+/* ============================================
+   MOBILE STYLES
+   ============================================ */
+@media (max-width: 520px) {
+  /* Trigger button - larger touch target */
+  .triggerButton {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    min-height: 40px;
+  }
+
+  .triggerIcon {
+    font-size: 1.2rem;
+  }
+
+  /* Modal - Full width bottom sheet style */
+  .modal {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    animation: slideUp 0.25s ease;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .modalHeader {
+    padding: 14px 16px;
+  }
+
+  .modalTitle {
+    font-size: 1.1rem;
+  }
+
+  .closeButton {
+    font-size: 1.4rem;
+  }
+
+  /* Theme Grid - 4 columns on mobile for better use of space */
+  .themeGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 12px 16px 24px;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .themeCard {
+    padding: 10px 4px;
+    min-height: 68px;
+    border-radius: 12px;
+  }
+
+  .themeEmoji {
+    font-size: 1.4rem;
+  }
+
+  .themeName {
+    font-size: 0.65rem;
+  }
+
+  .checkmark {
+    font-size: 0.7rem;
+    top: 3px;
+    right: 3px;
+  }
+
+  /* Disable hover effects on touch devices */
+  .themeCard:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .themeGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .themeCard {
+    min-height: 64px;
+  }
+
+  .themeEmoji {
+    font-size: 1.2rem;
+  }
+}

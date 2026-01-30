@@ -235,36 +235,64 @@
 }
 
 /* ============================================
-   CYBERPUNK THEME
+   CYBERPUNK THEME (Based on Cyberpunk 2077 UI/HUD)
    ============================================ */
 [data-theme='cyberpunk'] {
-  --bg-page: #050505;
-  --bg-board: #1A1A1A;
-  --bg-slot: #0D0D0D;
-  --text-primary: #00FFFF;
-  --tile-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-  --tile-2-bg: #FF00FF;
-  --tile-2-color: #FFFFFF;
-  --tile-4-bg: #00FFFF;
+  /* 环境色 - 纯黑底色 */
+  --bg-page: #000000;
+  --bg-board: #0A0A0A;
+  --bg-slot: #1A1A1A;
+  --text-primary: #F3E600; /* Cyber Yellow - 游戏标志性黄色 */
+
+  /* 几何 - 硬朗直角，科技感 */
+  --tile-border-radius: 0px;
+  --border-radius: 0px;
+  --font-family-base: "Courier New", "Rajdhani", "Orbitron", monospace;
+
+  /* 特效 - 霓虹发光 (三层发光增强效果) */
+  --tile-shadow:
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 0 40px var(--tile-bg);
+  --tile-border: 1px solid rgba(243, 230, 0, 0.3);
+
+  /* 背景网格 - HUD 扫描线效果 */
+  --bg-image-page:
+    linear-gradient(rgba(85, 234, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(85, 234, 212, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(197, 0, 60, 0.02) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(197, 0, 60, 0.02) 2px, transparent 2px);
+  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+
+  /* 方块颜色阶梯 - 基于 Cyberpunk 2077 UI 配色 */
+  /* Cyan 阶梯 - 低级植入体 */
+  --tile-2-bg: #55EAD4;
+  --tile-2-color: #000000;
+  --tile-4-bg: #00F0FF;
   --tile-4-color: #000000;
-  --tile-8-bg: #39FF14;
+  --tile-8-bg: #05D9E8;
   --tile-8-color: #000000;
-  --tile-16-bg: #FF006E;
-  --tile-16-color: #FFFFFF;
-  --tile-32-bg: #8338EC;
-  --tile-32-color: #FFFFFF;
-  --tile-64-bg: #3A86FF;
+  --tile-16-bg: #D1F7FF;
+  --tile-16-color: #000000;
+  /* Yellow 突变 - 高亮 */
+  --tile-32-bg: #F3E600;
+  --tile-32-color: #000000;
+  /* Red/Crimson - 战斗/危险 */
+  --tile-64-bg: #C5003C;
   --tile-64-color: #FFFFFF;
-  --tile-128-bg: #FB5607;
+  --tile-128-bg: #FF003C;
   --tile-128-color: #FFFFFF;
-  --tile-256-bg: #FFBE0B;
-  --tile-256-color: #000000;
-  --tile-512-bg: #06FFA5;
-  --tile-512-color: #000000;
-  --tile-1024-bg: #F72585;
-  --tile-1024-color: #FFFFFF;
-  --tile-2048-bg: #7209B7;
-  --tile-2048-color: #FFFFFF;
+  --tile-256-bg: #880425;
+  --tile-256-color: #FFFFFF;
+  /* Purple - 高级义体 */
+  --tile-512-bg: #7127FF;
+  --tile-512-color: #FFFFFF;
+  /* Chrome/Legendary */
+  --tile-1024-bg: #E0E0E0;
+  --tile-1024-color: #000000;
+  --tile-2048-bg: #FCEE0A;
+  --tile-2048-color: #000000;
 }
 
 /* ============================================
@@ -444,4 +472,19 @@
   0% { transform: scale(1); }
   50% { transform: scale(1.2); }
   100% { transform: scale(1); }
+}
+
+/* ============================================
+   CYBERPUNK THEME SPECIFIC OVERRIDES
+   ============================================ */
+[data-theme='cyberpunk'] body {
+  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+}
+
+/* Cyberpunk 霓虹文字发光效果 */
+[data-theme='cyberpunk'] .title {
+  text-shadow:
+    0 0 5px #F3E600,
+    0 0 10px #F3E600,
+    0 0 20px #F3E600;
 }
