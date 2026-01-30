@@ -107,8 +107,7 @@
 @media (max-width: 520px) {
   .container {
     padding: 10px;
-    justify-content: flex-start;
-    padding-top: 20px;
+    justify-content: center;
     min-height: 100vh;
   }
 
