@@ -29,5 +29,13 @@
   left: var(--board-padding);
   width: calc(100% - var(--board-padding) * 2);
   height: calc(100% - var(--board-padding) * 2);
-  pointer-events: none; /* Let clicks pass through to board for gestures if needed */
+  pointer-events: none;
+}
+
+/* Mobile adaptation */
+@media (max-width: 520px) {
+  .boardContainer {
+    max-width: 100vw;
+    max-height: 100vw;
+  }
 }

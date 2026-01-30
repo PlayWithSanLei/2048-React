@@ -68,30 +68,30 @@
 }
 
 /* ============================================
-   MINT THEME
+   MINT THEME (可读性修复 + 色阶优化)
    ============================================ */
 [data-theme='mint'] {
   --bg-page: #F0FFF4;
-  --bg-board: #C6F6D5;
+  --bg-board: #D1FAE5;
   --bg-slot: #E6FFFA;
   --text-primary: #22543D;
-  --tile-2-bg: #C6F6D5;
-  --tile-2-color: #22543D;
-  --tile-4-bg: #9AE6B4;
-  --tile-4-color: #22543D;
-  --tile-8-bg: #68D391;
-  --tile-8-color: #FFFFFF;
-  --tile-16-bg: #48BB78;
+  --tile-2-bg: #6EE7B7; /* 更深的薄荷绿，与棋盘区分 */
+  --tile-2-color: #064E3B;
+  --tile-4-bg: #5EEAD4;
+  --tile-4-color: #064E3B;
+  --tile-8-bg: #4FD1C5;
+  --tile-8-color: #064E3B;
+  --tile-16-bg: #38B2AC;
   --tile-16-color: #FFFFFF;
-  --tile-32-bg: #38A169;
+  --tile-32-bg: #319795;
   --tile-32-color: #FFFFFF;
-  --tile-64-bg: #2F855A;
+  --tile-64-bg: #285E61;
   --tile-64-color: #FFFFFF;
-  --tile-128-bg: #276749;
+  --tile-128-bg: #234E52;
   --tile-128-color: #FFFFFF;
-  --tile-256-bg: #22543D;
+  --tile-256-bg: #1D4044;
   --tile-256-color: #FFFFFF;
-  --tile-512-bg: #1C4532;
+  --tile-512-bg: #173034;
   --tile-512-color: #FFFFFF;
   --tile-1024-bg: #0F2D1D;
   --tile-1024-color: #FFFFFF;
@@ -100,7 +100,7 @@
 }
 
 /* ============================================
-   APPLE THEME
+   APPLE THEME (可读性修复)
    ============================================ */
 [data-theme='apple'] {
   --bg-page: #FFFFFF;
@@ -117,11 +117,11 @@
   --tile-8-bg: #C7C7CC;
   --tile-8-color: #1D1D1F;
   --tile-16-bg: #AEAEB2;
-  --tile-16-color: #FFFFFF;
+  --tile-16-color: #1D1D1F; /* 修复: 深灰字 */
   --tile-32-bg: #8E8E93;
-  --tile-32-color: #FFFFFF;
+  --tile-32-color: #1D1D1F; /* 修复: 深灰字 */
   --tile-64-bg: #636366;
-  --tile-64-color: #FFFFFF;
+  --tile-64-color: #1D1D1F; /* 修复: 深灰字 */
   --tile-128-bg: #48484A;
   --tile-128-color: #FFFFFF;
   --tile-256-bg: #3A3A3C;
@@ -168,7 +168,7 @@
 }
 
 /* ============================================
-   FESTIVE THEME (Chinese Celebration)
+   FESTIVE THEME (可读性修复)
    ============================================ */
 [data-theme='festive'] {
   --bg-page: #FFF5E6;
@@ -181,11 +181,11 @@
   --tile-4-bg: #FFA500;
   --tile-4-color: #8B0000;
   --tile-8-bg: #FF8C00;
-  --tile-8-color: #FFFFFF;
+  --tile-8-color: #5D0A0A; /* 修复: 深红字 */
   --tile-16-bg: #FF6347;
-  --tile-16-color: #FFFFFF;
+  --tile-16-color: #5D0A0A; /* 修复: 深红字 */
   --tile-32-bg: #FF4500;
-  --tile-32-color: #FFFFFF;
+  --tile-32-color: #5D0A0A; /* 修复: 深红字 */
   --tile-64-bg: #DC143C;
   --tile-64-color: #FFFFFF;
   --tile-128-bg: #B22222;
@@ -201,34 +201,34 @@
 }
 
 /* ============================================
-   INK THEME (Chinese Ink Wash)
+   INK THEME (宣纸质感优化)
    ============================================ */
 [data-theme='ink'] {
-  --bg-page: #F5F5F5;
+  --bg-page: #F5F5DC; /* 宣纸米黄色 */
   --bg-board: #2C2C2C;
   --bg-slot: #1A1A1A;
   --text-primary: #0A0A0A;
   --font-family-base: "KaiTi", "STKaiti", "BiauKai", serif;
   --tile-border: 2px solid #0A0A0A;
-  --tile-2-bg: #FFFFFF;
+  --tile-2-bg: #FAF9F6; /* 暖白，带宣纸感 */
   --tile-2-color: #0A0A0A;
-  --tile-4-bg: #E8E8E8;
+  --tile-4-bg: #F0EDE8;
   --tile-4-color: #0A0A0A;
-  --tile-8-bg: #D0D0D0;
+  --tile-8-bg: #E8E5DD;
   --tile-8-color: #0A0A0A;
-  --tile-16-bg: #B8B8B8;
+  --tile-16-bg: #D0CCC0;
   --tile-16-color: #0A0A0A;
-  --tile-32-bg: #A0A0A0;
+  --tile-32-bg: #B8B4A8;
   --tile-32-color: #FFFFFF;
-  --tile-64-bg: #888888;
+  --tile-64-bg: #A09C90;
   --tile-64-color: #FFFFFF;
-  --tile-128-bg: #707070;
+  --tile-128-bg: #888480;
   --tile-128-color: #FFFFFF;
-  --tile-256-bg: #585858;
+  --tile-256-bg: #706C60;
   --tile-256-color: #FFFFFF;
-  --tile-512-bg: #404040;
+  --tile-512-bg: #585450;
   --tile-512-color: #FFFFFF;
-  --tile-1024-bg: #282828;
+  --tile-1024-bg: #403C30;
   --tile-1024-color: #FFFFFF;
   --tile-2048-bg: #0A0A0A;
   --tile-2048-color: #FFFFFF;
@@ -263,7 +263,6 @@
     linear-gradient(90deg, rgba(85, 234, 212, 0.03) 1px, transparent 1px),
     linear-gradient(rgba(197, 0, 60, 0.02) 2px, transparent 2px),
     linear-gradient(90deg, rgba(197, 0, 60, 0.02) 2px, transparent 2px);
-  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
 
   /* 方块颜色阶梯 - 基于 Cyberpunk 2077 UI 配色 */
   /* Cyan 阶梯 - 低级植入体 */
@@ -429,37 +428,39 @@
 }
 
 /* ============================================
-   MICROSOFT THEME
+   MICROSOFT THEME (Windows 10/11 Fluent Design 优化)
    ============================================ */
 [data-theme='microsoft'] {
-  --bg-page: #F0F0F0;
+  --bg-page: #F3F3F3; /* Mica 材质感 */
   --bg-board: #EDEDED;
   --bg-slot: #FFFFFF;
   --text-primary: #1F1F1F;
   --tile-border-radius: 0px;
   --border-radius: 0px;
   --font-family-base: "Segoe UI", "Helvetica Neue", sans-serif;
-  --tile-2-bg: #EDEDED;
+
+  /* Windows Blue 阶梯 - 浅灰到蓝色渐变 */
+  --tile-2-bg: #FFFFFF;
   --tile-2-color: #1F1F1F;
-  --tile-4-bg: #D2D2D2;
+  --tile-4-bg: #F5F5F5;
   --tile-4-color: #1F1F1F;
-  --tile-8-bg: #B8B8B8;
+  --tile-8-bg: #E5E5E5;
   --tile-8-color: #1F1F1F;
-  --tile-16-bg: #9E9E9E;
-  --tile-16-color: #FFFFFF;
-  --tile-32-bg: #858585;
-  --tile-32-color: #FFFFFF;
-  --tile-64-bg: #6B6B6B;
-  --tile-64-color: #FFFFFF;
-  --tile-128-bg: #0078D4;
-  --tile-128-color: #FFFFFF;
-  --tile-256-bg: #106EBE;
+  --tile-16-bg: #CCCCCC;
+  --tile-16-color: #1F1F1F;
+  --tile-32-bg: #99EBFF; /* Light Blue */
+  --tile-32-color: #1F1F1F;
+  --tile-64-bg: #66D9FF; /* Sky Blue */
+  --tile-64-color: #1F1F1F;
+  --tile-128-bg: #33C7FF; /* Vivid Blue */
+  --tile-128-color: #1F1F1F;
+  --tile-256-bg: #0078D7; /* Windows 10 Blue - Standard */
   --tile-256-color: #FFFFFF;
-  --tile-512-bg: #005A9E;
+  --tile-512-bg: #0063B1; /* Darker Blue */
   --tile-512-color: #FFFFFF;
-  --tile-1024-bg: #004578;
+  --tile-1024-bg: #005A9E; /* Deep Blue */
   --tile-1024-color: #FFFFFF;
-  --tile-2048-bg: #002B50;
+  --tile-2048-bg: #0078D4; /* Brand Blue - 带强调 */
   --tile-2048-color: #FFFFFF;
 }
 
@@ -487,4 +488,38 @@
     0 0 5px #F3E600,
     0 0 10px #F3E600,
     0 0 20px #F3E600;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE ADAPTATION
+   ============================================ */
+@media screen and (max-width: 520px) {
+  :root {
+    /* 使用 vmin 单位实现流式缩放，确保横竖屏都适配 */
+    --tile-size: 18.5vmin;
+    --grid-gap: 2.5vmin;
+    --board-padding: 2.5vmin;
+    --border-radius: 4px;
+    --tile-border-radius: 4px;
+  }
+
+  /* Apple 主题保持圆角但稍微缩小 */
+  [data-theme='apple'] {
+    --tile-border-radius: 8px;
+    --border-radius: 8px;
+  }
+
+  /* Cyberpunk 主题保持直角 */
+  [data-theme='cyberpunk'],
+  [data-theme='mario'],
+  [data-theme='microsoft'] {
+    --tile-border-radius: 0px;
+    --border-radius: 0px;
+  }
+
+  /* Steampunk 小圆角 */
+  [data-theme='steampunk'] {
+    --tile-border-radius: 2px;
+    --border-radius: 2px;
+  }
 }
