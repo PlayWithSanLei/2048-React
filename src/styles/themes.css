@@ -6,6 +6,12 @@
   --text-primary: #776E65;
   --text-light: #FFFFFF;
 
+  /* 棋盘上方元素文字 (Score labels, Buttons) - 默认使用主色 */
+  --text-board: var(--text-primary);
+
+  /* 分数面板文字 - 默认使用主色 */
+  --score-text: #776E65;
+
   /* 基础尺寸 */
   --tile-size: 100px;
   --grid-gap: 15px;
@@ -142,6 +148,8 @@
   --bg-board: #3C6E47;
   --bg-slot: #2D5237;
   --text-primary: #1A3A21;
+  --text-board: #F0F9F0; /* 浅绿/白色，深色棋盘可读 */
+  --score-text: #A5D6A7; /* 亮绿字，深色背景可读 */
   --font-family-base: "KaiTi", "STKaiti", "BiauKai", serif;
   --tile-2-bg: #C8E6C9;
   --tile-2-color: #1A3A21;
@@ -175,6 +183,8 @@
   --bg-board: #C41E3A;
   --bg-slot: #8B0000;
   --text-primary: #5D0A0A;
+  --text-board: #FFD700; /* 金色，深红棋盘可读 */
+  --score-text: #FFD700; /* 金色字，深红背景可读 */
   --font-family-base: "SimSun", "Songti SC", serif;
   --tile-2-bg: #FFD700;
   --tile-2-color: #8B0000;
@@ -208,6 +218,8 @@
   --bg-board: #2C2C2C;
   --bg-slot: #1A1A1A;
   --text-primary: #0A0A0A;
+  --text-board: #D0CCC0; /* 浅灰/米色，深色棋盘可读 */
+  --score-text: #D0CCC0; /* 浅灰字，深色背景可读 */
   --font-family-base: "KaiTi", "STKaiti", "BiauKai", serif;
   --tile-border: 2px solid #0A0A0A;
   --tile-2-bg: #FAF9F6; /* 暖白，带宣纸感 */
@@ -243,6 +255,8 @@
   --bg-board: #0A0A0A;
   --bg-slot: #1A1A1A;
   --text-primary: #F3E600; /* Cyber Yellow - 游戏标志性黄色 */
+  --text-board: #F3E600; /* 黄色，黑色棋盘可读 */
+  --score-text: #F3E600; /* 黄色字，黑色背景可读 */
 
   /* 几何 - 硬朗直角，科技感 */
   --tile-border-radius: 0px;
@@ -302,6 +316,8 @@
   --bg-board: #4A3728;
   --bg-slot: #3D2D22;
   --text-primary: #D4A574;
+  --text-board: #D4A574; /* 浅金色，深色棋盘已可读 */
+  --score-text: #FFD700; /* 金色字，棕色背景可读 */
   --tile-border: 2px solid #8B6914;
   --tile-border-radius: 2px;
   --tile-2-bg: #CD7F32;
@@ -336,6 +352,8 @@
   --bg-board: #2D2D35;
   --bg-slot: #1F1F25;
   --text-primary: #C5A059;
+  --text-board: #C5A059; /* 金色，深色棋盘已可读 */
+  --score-text: #C5A059; /* 金色字，暗色背景可读 */
   --font-family-base: "Cinzel", "Trajan Pro", "Times New Roman", serif;
   --tile-2-bg: #3E3E4A;
   --tile-2-color: #C5A059;
@@ -369,6 +387,8 @@
   --bg-board: #2D4A35;
   --bg-slot: #1F3A25;
   --text-primary: #FFD700;
+  --text-board: #FFD700; /* 金色，深色棋盘已可读 */
+  --score-text: #FFD700; /* 金色字，深色背景可读 */
   --tile-2-bg: #00BFFF;
   --tile-2-color: #FFFFFF;
   --tile-4-bg: #009ACD;

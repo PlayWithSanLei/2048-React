@@ -22,9 +22,9 @@ export const Board: React.FC<BoardProps> = ({ tiles, onMove }) => {
       else if (swipeY === 1) onMove('DOWN');
     },
     {
-      threshold: 20,
+      threshold: 8,
       swipe: {
-        duration: 2000,
+        duration: 500,
       },
     }
   );
