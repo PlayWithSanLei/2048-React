@@ -2,6 +2,7 @@
 
 ![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square)
 ![Coverage](https://img.shields.io/badge/coverage-97.94%25-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 
 一款基于 **React 18** 和 **TypeScript** 重构的现代化 2048 游戏。本项目专注于极致的交互体验、丝滑的动画效果以及清新的“糖果色”视觉风格。
 
