@@ -20,7 +20,7 @@
   width: var(--tile-size);
   height: var(--tile-size);
   background: var(--bg-slot);
-  border-radius: var(--border-radius);
+  border-radius: var(--tile-border-radius);
 }
 
 .tileContainer {

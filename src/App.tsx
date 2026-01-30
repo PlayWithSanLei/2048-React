@@ -33,6 +33,12 @@ const App: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      {/* Theme switcher in top right */}
+      <div className={styles.topBar}>
+        <ThemeSwitcher />
+      </div>
+
+      {/* Header with title and scores */}
       <div className={styles.header}>
         <h1 className={styles.title}>2048</h1>
         <ScorePanel score={score} bestScore={bestScore} />
@@ -54,7 +60,6 @@ const App: React.FC = () => {
       </div>
 
       <div className={styles.controls}>
-        <ThemeSwitcher />
         <button
           className={`${styles.undoButton} ${!canUndo ? styles.disabled : ''}`}
           onClick={handleUndo}

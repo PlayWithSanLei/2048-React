@@ -11,6 +11,18 @@
   --grid-gap: 15px;
   --board-padding: 15px;
   --border-radius: 6px;
+  --tile-border-radius: 6px;
+
+  /* 字体 */
+  --font-family-base: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+
+  /* 特效 */
+  --tile-shadow: none;
+  --tile-border: none;
+
+  /* 背景纹理 */
+  --bg-image-page: none;
+  --bg-image-board: none;
 
   /* 动画曲线 */
   --transition-move: transform 100ms ease-in-out;
@@ -55,11 +67,372 @@
   --tile-super-color: #FFFFFF;
 }
 
+/* ============================================
+   MINT THEME
+   ============================================ */
 [data-theme='mint'] {
   --bg-page: #F0FFF4;
   --bg-board: #C6F6D5;
   --bg-slot: #E6FFFA;
-  /* 可根据需要补充其他薄荷色系变量 */
+  --text-primary: #22543D;
+  --tile-2-bg: #C6F6D5;
+  --tile-2-color: #22543D;
+  --tile-4-bg: #9AE6B4;
+  --tile-4-color: #22543D;
+  --tile-8-bg: #68D391;
+  --tile-8-color: #FFFFFF;
+  --tile-16-bg: #48BB78;
+  --tile-16-color: #FFFFFF;
+  --tile-32-bg: #38A169;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #2F855A;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #276749;
+  --tile-128-color: #FFFFFF;
+  --tile-256-bg: #22543D;
+  --tile-256-color: #FFFFFF;
+  --tile-512-bg: #1C4532;
+  --tile-512-color: #FFFFFF;
+  --tile-1024-bg: #0F2D1D;
+  --tile-1024-color: #FFFFFF;
+  --tile-2048-bg: #051F14;
+  --tile-2048-color: #FFFFFF;
+}
+
+/* ============================================
+   APPLE THEME
+   ============================================ */
+[data-theme='apple'] {
+  --bg-page: #FFFFFF;
+  --bg-board: #F5F5F7;
+  --bg-slot: #E8E8ED;
+  --text-primary: #1D1D1F;
+  --tile-border-radius: 12px;
+  --border-radius: 12px;
+  --font-family-base: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  --tile-2-bg: #E8E8ED;
+  --tile-2-color: #1D1D1F;
+  --tile-4-bg: #D1D1D6;
+  --tile-4-color: #1D1D1F;
+  --tile-8-bg: #C7C7CC;
+  --tile-8-color: #1D1D1F;
+  --tile-16-bg: #AEAEB2;
+  --tile-16-color: #FFFFFF;
+  --tile-32-bg: #8E8E93;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #636366;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #48484A;
+  --tile-128-color: #FFFFFF;
+  --tile-256-bg: #3A3A3C;
+  --tile-256-color: #FFFFFF;
+  --tile-512-bg: #2C2C2E;
+  --tile-512-color: #FFFFFF;
+  --tile-1024-bg: #1C1C1E;
+  --tile-1024-color: #FFFFFF;
+  --tile-2048-bg: #007AFF;
+  --tile-2048-color: #FFFFFF;
+}
+
+/* ============================================
+   BAMBOO THEME (Chinese Bamboo)
+   ============================================ */
+[data-theme='bamboo'] {
+  --bg-page: #F0F9F0;
+  --bg-board: #3C6E47;
+  --bg-slot: #2D5237;
+  --text-primary: #1A3A21;
+  --font-family-base: "KaiTi", "STKaiti", "BiauKai", serif;
+  --tile-2-bg: #C8E6C9;
+  --tile-2-color: #1A3A21;
+  --tile-4-bg: #A5D6A7;
+  --tile-4-color: #1A3A21;
+  --tile-8-bg: #81C784;
+  --tile-8-color: #1A3A21;
+  --tile-16-bg: #66BB6A;
+  --tile-16-color: #FFFFFF;
+  --tile-32-bg: #4CAF50;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #43A047;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #388E3C;
+  --tile-128-color: #FFFFFF;
+  --tile-256-bg: #2E7D32;
+  --tile-256-color: #FFFFFF;
+  --tile-512-bg: #1B5E20;
+  --tile-512-color: #FFFFFF;
+  --tile-1024-bg: #8B7355;
+  --tile-1024-color: #FFFFFF;
+  --tile-2048-bg: #5D4037;
+  --tile-2048-color: #FFFFFF;
+}
+
+/* ============================================
+   FESTIVE THEME (Chinese Celebration)
+   ============================================ */
+[data-theme='festive'] {
+  --bg-page: #FFF5E6;
+  --bg-board: #C41E3A;
+  --bg-slot: #8B0000;
+  --text-primary: #5D0A0A;
+  --font-family-base: "SimSun", "Songti SC", serif;
+  --tile-2-bg: #FFD700;
+  --tile-2-color: #8B0000;
+  --tile-4-bg: #FFA500;
+  --tile-4-color: #8B0000;
+  --tile-8-bg: #FF8C00;
+  --tile-8-color: #FFFFFF;
+  --tile-16-bg: #FF6347;
+  --tile-16-color: #FFFFFF;
+  --tile-32-bg: #FF4500;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #DC143C;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #B22222;
+  --tile-128-color: #FFFFFF;
+  --tile-256-bg: #8B0000;
+  --tile-256-color: #FFD700;
+  --tile-512-bg: #C41E3A;
+  --tile-512-color: #FFD700;
+  --tile-1024-bg: #FFD700;
+  --tile-1024-color: #8B0000;
+  --tile-2048-bg: #DAA520;
+  --tile-2048-color: #8B0000;
+}
+
+/* ============================================
+   INK THEME (Chinese Ink Wash)
+   ============================================ */
+[data-theme='ink'] {
+  --bg-page: #F5F5F5;
+  --bg-board: #2C2C2C;
+  --bg-slot: #1A1A1A;
+  --text-primary: #0A0A0A;
+  --font-family-base: "KaiTi", "STKaiti", "BiauKai", serif;
+  --tile-border: 2px solid #0A0A0A;
+  --tile-2-bg: #FFFFFF;
+  --tile-2-color: #0A0A0A;
+  --tile-4-bg: #E8E8E8;
+  --tile-4-color: #0A0A0A;
+  --tile-8-bg: #D0D0D0;
+  --tile-8-color: #0A0A0A;
+  --tile-16-bg: #B8B8B8;
+  --tile-16-color: #0A0A0A;
+  --tile-32-bg: #A0A0A0;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #888888;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #707070;
+  --tile-128-color: #FFFFFF;
+  --tile-256-bg: #585858;
+  --tile-256-color: #FFFFFF;
+  --tile-512-bg: #404040;
+  --tile-512-color: #FFFFFF;
+  --tile-1024-bg: #282828;
+  --tile-1024-color: #FFFFFF;
+  --tile-2048-bg: #0A0A0A;
+  --tile-2048-color: #FFFFFF;
+}
+
+/* ============================================
+   CYBERPUNK THEME
+   ============================================ */
+[data-theme='cyberpunk'] {
+  --bg-page: #050505;
+  --bg-board: #1A1A1A;
+  --bg-slot: #0D0D0D;
+  --text-primary: #00FFFF;
+  --tile-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+  --tile-2-bg: #FF00FF;
+  --tile-2-color: #FFFFFF;
+  --tile-4-bg: #00FFFF;
+  --tile-4-color: #000000;
+  --tile-8-bg: #39FF14;
+  --tile-8-color: #000000;
+  --tile-16-bg: #FF006E;
+  --tile-16-color: #FFFFFF;
+  --tile-32-bg: #8338EC;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #3A86FF;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #FB5607;
+  --tile-128-color: #FFFFFF;
+  --tile-256-bg: #FFBE0B;
+  --tile-256-color: #000000;
+  --tile-512-bg: #06FFA5;
+  --tile-512-color: #000000;
+  --tile-1024-bg: #F72585;
+  --tile-1024-color: #FFFFFF;
+  --tile-2048-bg: #7209B7;
+  --tile-2048-color: #FFFFFF;
+}
+
+/* ============================================
+   STEAMPUNK THEME
+   ============================================ */
+[data-theme='steampunk'] {
+  --bg-page: #2C241B;
+  --bg-board: #4A3728;
+  --bg-slot: #3D2D22;
+  --text-primary: #D4A574;
+  --tile-border: 2px solid #8B6914;
+  --tile-border-radius: 2px;
+  --tile-2-bg: #CD7F32;
+  --tile-2-color: #2C241B;
+  --tile-4-bg: #B8860B;
+  --tile-4-color: #2C241B;
+  --tile-8-bg: #DAA520;
+  --tile-8-color: #2C241B;
+  --tile-16-bg: #B5A642;
+  --tile-16-color: #2C241B;
+  --tile-32-bg: #8B7355;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #A0522D;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #8B4513;
+  --tile-128-color: #FFFFFF;
+  --tile-256-bg: #654321;
+  --tile-256-color: #DAA520;
+  --tile-512-bg: #4A3728;
+  --tile-512-color: #DAA520;
+  --tile-1024-bg: #2C241B;
+  --tile-1024-color: #CD7F32;
+  --tile-2048-bg: #1A120B;
+  --tile-2048-color: #FFD700;
+}
+
+/* ============================================
+   WITCHER THEME
+   ============================================ */
+[data-theme='witcher'] {
+  --bg-page: #1A1A1D;
+  --bg-board: #2D2D35;
+  --bg-slot: #1F1F25;
+  --text-primary: #C5A059;
+  --font-family-base: "Cinzel", "Trajan Pro", "Times New Roman", serif;
+  --tile-2-bg: #3E3E4A;
+  --tile-2-color: #C5A059;
+  --tile-4-bg: #4A4A58;
+  --tile-4-color: #C5A059;
+  --tile-8-bg: #5C5C6E;
+  --tile-8-color: #FFFFFF;
+  --tile-16-bg: #6E6E82;
+  --tile-16-color: #FFFFFF;
+  --tile-32-bg: #828296;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #9696AA;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #A8A8BC;
+  --tile-128-color: #FFFFFF;
+  --tile-256-bg: #BABACE;
+  --tile-256-color: #1A1A1D;
+  --tile-512-bg: #8B0000;
+  --tile-512-color: #FFFFFF;
+  --tile-1024-bg: #5C0A0A;
+  --tile-1024-color: #C5A059;
+  --tile-2048-bg: #C5A059;
+  --tile-2048-color: #1A1A1D;
+}
+
+/* ============================================
+   ZELDA THEME
+   ============================================ */
+[data-theme='zelda'] {
+  --bg-page: #1A2820;
+  --bg-board: #2D4A35;
+  --bg-slot: #1F3A25;
+  --text-primary: #FFD700;
+  --tile-2-bg: #00BFFF;
+  --tile-2-color: #FFFFFF;
+  --tile-4-bg: #009ACD;
+  --tile-4-color: #FFFFFF;
+  --tile-8-bg: #228B22;
+  --tile-8-color: #FFFFFF;
+  --tile-16-bg: #32CD32;
+  --tile-16-color: #FFFFFF;
+  --tile-32-bg: #90EE90;
+  --tile-32-color: #1A2820;
+  --tile-64-bg: #00FF7F;
+  --tile-64-color: #1A2820;
+  --tile-128-bg: #FFD700;
+  --tile-128-color: #1A2820;
+  --tile-256-bg: #FFA500;
+  --tile-256-color: #FFFFFF;
+  --tile-512-bg: #FF8C00;
+  --tile-512-color: #FFFFFF;
+  --tile-1024-bg: #FF6347;
+  --tile-1024-color: #FFFFFF;
+  --tile-2048-bg: #FFD700;
+  --tile-2048-color: #1A2820;
+}
+
+/* ============================================
+   MARIO THEME
+   ============================================ */
+[data-theme='mario'] {
+  --bg-page: #5C94FC;
+  --bg-board: #804000;
+  --bg-slot: #6B3200;
+  --text-primary: #FFFFFF;
+  --tile-border-radius: 0px;
+  --border-radius: 0px;
+  --tile-2-bg: #E52521;
+  --tile-2-color: #FFFFFF;
+  --tile-4-bg: #049CD8;
+  --tile-4-color: #FFFFFF;
+  --tile-8-bg: #43B047;
+  --tile-8-color: #FFFFFF;
+  --tile-16-bg: #FFD700;
+  --tile-16-color: #000000;
+  --tile-32-bg: #FFA500;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #AA6C39;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #F8F8F8;
+  --tile-128-color: #E52521;
+  --tile-256-bg: #FFD700;
+  --tile-256-color: #000000;
+  --tile-512-bg: #00A800;
+  --tile-512-color: #FFFFFF;
+  --tile-1024-bg: #E52521;
+  --tile-1024-color: #FFFFFF;
+  --tile-2048-bg: #049CD8;
+  --tile-2048-color: #FFFFFF;
+}
+
+/* ============================================
+   MICROSOFT THEME
+   ============================================ */
+[data-theme='microsoft'] {
+  --bg-page: #F0F0F0;
+  --bg-board: #EDEDED;
+  --bg-slot: #FFFFFF;
+  --text-primary: #1F1F1F;
+  --tile-border-radius: 0px;
+  --border-radius: 0px;
+  --font-family-base: "Segoe UI", "Helvetica Neue", sans-serif;
+  --tile-2-bg: #EDEDED;
+  --tile-2-color: #1F1F1F;
+  --tile-4-bg: #D2D2D2;
+  --tile-4-color: #1F1F1F;
+  --tile-8-bg: #B8B8B8;
+  --tile-8-color: #1F1F1F;
+  --tile-16-bg: #9E9E9E;
+  --tile-16-color: #FFFFFF;
+  --tile-32-bg: #858585;
+  --tile-32-color: #FFFFFF;
+  --tile-64-bg: #6B6B6B;
+  --tile-64-color: #FFFFFF;
+  --tile-128-bg: #0078D4;
+  --tile-128-color: #FFFFFF;
+  --tile-256-bg: #106EBE;
+  --tile-256-color: #FFFFFF;
+  --tile-512-bg: #005A9E;
+  --tile-512-color: #FFFFFF;
+  --tile-1024-bg: #004578;
+  --tile-1024-color: #FFFFFF;
+  --tile-2048-bg: #002B50;
+  --tile-2048-color: #FFFFFF;
 }
 
 @keyframes pop {

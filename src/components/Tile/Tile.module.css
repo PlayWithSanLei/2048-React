@@ -2,7 +2,7 @@
   position: absolute;
   width: var(--tile-size);
   height: var(--tile-size);
-  border-radius: var(--border-radius);
+  border-radius: var(--tile-border-radius);
   transition: var(--transition-move);
   transform: translate(
     calc(var(--x) * (var(--tile-size) + var(--grid-gap))),
@@ -17,13 +17,16 @@
 .inner {
   width: 100%;
   height: 100%;
-  border-radius: var(--border-radius);
+  border-radius: var(--tile-border-radius);
+  border: var(--tile-border);
+  box-shadow: var(--tile-shadow);
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   font-size: 2rem;
   line-height: var(--tile-size);
+  font-family: var(--font-family-base);
 }
 
 .new .inner {
