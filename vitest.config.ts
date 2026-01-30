@@ -17,6 +17,8 @@ export default defineConfig({
         '**/*.config.*',
         '**/dist/**',
         '**/coverage/**',
+        'src/main.tsx',
+        'src/App.tsx',
       ],
       include: ['src/**/*.{ts,tsx}'],
       thresholds: {
