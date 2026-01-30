@@ -17,6 +17,23 @@ import {
   saveGameState,
 } from '../utils/storage';
 
+// History state interface (without bestScore as it shouldn't be undone)
+interface HistoryState {
+  tiles: Tile[];
+  score: number;
+  over: boolean;
+  won: boolean;
+}
+
+// Deep clone tiles for history
+const cloneTiles = (tiles: Tile[]): Tile[] => {
+  return tiles.map(tile => ({
+    ...tile,
+    position: { ...tile.position },
+    mergedFrom: tile.mergedFrom ? cloneTiles(tile.mergedFrom) : undefined,
+  }));
+};
+
 export const useGame = () => {
   const [tiles, setTiles] = useState<Tile[]>([]);
   const [score, setScore] = useState(0);
@@ -25,18 +42,21 @@ export const useGame = () => {
   const [won, setWon] = useState(false);
   const [initialized, setInitialized] = useState(false);
 
+  // History for undo functionality
+  const [history, setHistory] = useState<HistoryState[]>([]);
+
   const startNewGame = useCallback(() => {
     const t1 = generateRandomTile(getEmptyGrid());
-    
+
     // We need to construct a grid that has t1 to ensure t2 doesn't spawn on top if using `getEmptyGrid` logic naively,
     // but `generateRandomTile` takes a grid.
-    
+
     // Let's do it properly:
     const grid = getEmptyGrid();
     if (t1) grid[t1.position.y][t1.position.x] = t1;
-    
+
     const t2 = generateRandomTile(grid);
-    
+
     const initialTiles = [];
     if (t1) initialTiles.push(t1);
     if (t2) initialTiles.push(t2);
@@ -45,6 +65,9 @@ export const useGame = () => {
     setScore(0);
     setOver(false);
     setWon(false);
+
+    // Clear history when starting a new game
+    setHistory([]);
   }, []);
 
   // Initialize game
@@ -60,6 +83,7 @@ export const useGame = () => {
       startNewGame();
     }
     setInitialized(true);
+    // Note: History is not persisted (as per design decision)
   }, [startNewGame]);
 
   // Save state on change
@@ -73,7 +97,7 @@ export const useGame = () => {
       won,
     };
     saveGameState(state);
-    
+
     if (score > bestScore) {
       setBestScore(score);
       setBestScoreState(score);
@@ -91,6 +115,14 @@ export const useGame = () => {
     const result = move(tiles, direction);
 
     if (result.moved) {
+      // Save current state to history before making changes
+      setHistory(prev => [...prev, {
+        tiles: cloneTiles(tiles),
+        score,
+        over,
+        won,
+      }]);
+
       const newScore = score + result.scoreIncrease;
       setScore(newScore);
 
@@ -103,7 +135,7 @@ export const useGame = () => {
       // Construct grid from result tiles
       const grid = getEmptyGrid();
       result.tiles.forEach(t => grid[t.position.y][t.position.x] = t);
-      
+
       const newTile = generateRandomTile(grid);
       if (newTile) {
         result.tiles.push(newTile);
@@ -118,6 +150,23 @@ export const useGame = () => {
     }
   }, [tiles, score, over, won]);
 
+  // Undo function
+  const undo = useCallback(() => {
+    if (history.length === 0) return;
+
+    const previousState = history[history.length - 1];
+    const newHistory = history.slice(0, -1);
+
+    setTiles(previousState.tiles);
+    setScore(previousState.score);
+    setOver(previousState.over);
+    setWon(previousState.won);
+    setHistory(newHistory);
+  }, [history]);
+
+  // Check if undo is available
+  const canUndo = history.length > 0;
+
   return {
     tiles,
     score,
@@ -126,5 +175,7 @@ export const useGame = () => {
     won,
     moveTiles,
     startNewGame,
+    undo,
+    canUndo,
   };
 };
