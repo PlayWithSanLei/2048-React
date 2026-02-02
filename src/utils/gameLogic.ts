@@ -19,6 +19,7 @@ export interface GameState {
   bestScore: number;
   over: boolean;
   won: boolean;
+  keepPlaying?: boolean;
 }
 
 export type Grid = (Tile | null)[][];

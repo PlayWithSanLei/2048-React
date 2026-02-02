@@ -7,7 +7,7 @@ import styles from './App.module.css';
 import './styles/globals.css';
 
 const App: React.FC = () => {
-  const { tiles, score, bestScore, over, won, moveTiles, startNewGame, undo, canUndo } = useGame();
+  const { tiles, score, bestScore, over, won, keepPlaying, moveTiles, startNewGame, continueGame, undo, canUndo } = useGame();
 
   // Handle keyboard shortcuts for undo
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -47,14 +47,20 @@ const App: React.FC = () => {
       <div className={styles.gameContainer}>
         <Board tiles={tiles} onMove={moveTiles} />
 
-        {(over || won) && (
+        {(over || (won && !keepPlaying)) && (
           <div className={styles.overlay}>
             <div className={styles.message}>
               {won ? 'You Win!' : 'Game Over!'}
             </div>
-            <button className={styles.restartButton} onClick={startNewGame}>
-              {won ? 'Keep Playing' : 'Try Again'}
-            </button>
+            {won ? (
+              <button className={styles.restartButton} onClick={continueGame}>
+                Keep Playing
+              </button>
+            ) : (
+              <button className={styles.restartButton} onClick={startNewGame}>
+                Try Again
+              </button>
+            )}
           </div>
         )}
       </div>

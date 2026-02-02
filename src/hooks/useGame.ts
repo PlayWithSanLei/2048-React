@@ -40,6 +40,7 @@ export const useGame = () => {
   const [bestScore, setBestScoreState] = useState(getBestScore());
   const [over, setOver] = useState(false);
   const [won, setWon] = useState(false);
+  const [keepPlaying, setKeepPlaying] = useState(false);
   const [initialized, setInitialized] = useState(false);
 
   // History for undo functionality
@@ -65,6 +66,7 @@ export const useGame = () => {
     setScore(0);
     setOver(false);
     setWon(false);
+    setKeepPlaying(false);
 
     // Clear history when starting a new game
     setHistory([]);
@@ -79,6 +81,7 @@ export const useGame = () => {
       setBestScoreState(savedState.bestScore);
       setOver(savedState.over);
       setWon(savedState.won);
+      setKeepPlaying(savedState.keepPlaying || false);
     } else {
       startNewGame();
     }
@@ -95,6 +98,7 @@ export const useGame = () => {
       bestScore,
       over,
       won,
+      keepPlaying,
     };
     saveGameState(state);
 
@@ -102,7 +106,7 @@ export const useGame = () => {
       setBestScore(score);
       setBestScoreState(score);
     }
-  }, [tiles, score, bestScore, over, won, initialized]);
+  }, [tiles, score, bestScore, over, won, keepPlaying, initialized]);
 
   const moveTiles = useCallback((direction: Direction) => {
     if (over || (!won && !hasMoves(tiles) && tiles.length > 0)) {
@@ -167,14 +171,20 @@ export const useGame = () => {
   // Check if undo is available
   const canUndo = history.length > 0;
 
+  const continueGame = useCallback(() => {
+    setKeepPlaying(true);
+  }, []);
+
   return {
     tiles,
     score,
     bestScore,
     over,
     won,
+    keepPlaying,
     moveTiles,
     startNewGame,
+    continueGame,
     undo,
     canUndo,
   };
